@@ -1,7 +1,7 @@
-package com.gmail.kamemaru2011.Utils
+package com.gmail.kamemaru2011.utils
 
 import android.util.Log
-import com.gmail.kamemaru2011.Utils.UtilsBehavior.Companion.isLOG
+import com.gmail.kamemaru2011.utils.UtilsBehavior.Companion.isLOG
 
 class LogUtils{
     companion object {

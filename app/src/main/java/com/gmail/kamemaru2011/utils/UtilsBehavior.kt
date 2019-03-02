@@ -1,4 +1,4 @@
-package com.gmail.kamemaru2011.Utils
+package com.gmail.kamemaru2011.utils
 
 class UtilsBehavior{
     companion object {
