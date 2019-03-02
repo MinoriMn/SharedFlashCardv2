@@ -1,31 +1,24 @@
-package com.gmail.kamemaru2011.Activity
+package com.gmail.kamemaru2011.top
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 
 import com.gmail.kamemaru2011.R
-import com.gmail.kamemaru2011.Utils.LogUtils
 
-class MainActivity : AppCompatActivity() {
-
-    private var mTextMessage: TextView? = null
+class TopActivity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                mTextMessage!!.setText(R.string.title_home)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                mTextMessage!!.setText(R.string.title_dashboard)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                mTextMessage!!.setText(R.string.title_notifications)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -35,8 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        mTextMessage = findViewById(R.id.message)
+        
         val navigation = findViewById<View>(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }

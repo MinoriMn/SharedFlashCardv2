@@ -1,4 +1,4 @@
-package com.gmail.kamemaru2011.Model
+package com.gmail.kamemaru2011.model
 
 import android.app.Activity
 import android.content.SharedPreferences
