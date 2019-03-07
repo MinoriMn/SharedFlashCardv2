@@ -1,30 +1,48 @@
 package com.gmail.kamemaru2011.activity.top
 
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
-import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
-
 import com.gmail.kamemaru2011.R
+import kotlinx.android.synthetic.main.activity_top.*
+import kotlinx.android.synthetic.main.app_bar_top.*
 
-class TopActivity() : AppCompatActivity(), TopContract.View {
+class TopActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, TopContract.View {
 
     override val presenter: TopContract.Prensenter = TopPresenter(this)
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        return@OnNavigationItemSelectedListener presenter.bottomNavigationItemSelected(item)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        presenter.start()
+        setContentView(R.layout.activity_top)
+        setSupportActionBar(toolbar)
 
-        val navigation = findViewById<View>(R.id.navigation) as BottomNavigationView
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        nav_view.setNavigationItemSelectedListener(this)
+
+        presenter.start()
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        drawer_layout.closeDrawer(GravityCompat.START)
+
+        return presenter.navigationItemSelected(item)
     }
 
     override fun fragmentTransaction(fragment: Fragment) {
@@ -34,5 +52,4 @@ class TopActivity() : AppCompatActivity(), TopContract.View {
                 .replace(R.id.fragment_container, fragment)
                 .commit()
     }
-
 }

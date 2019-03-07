@@ -7,7 +7,7 @@ import com.gmail.kamemaru2011.mvp_base.BaseView
 
 interface TopContract{
     interface Prensenter : BasePresenter{
-        fun bottomNavigationItemSelected(item : MenuItem) : Boolean
+        fun navigationItemSelected(item : MenuItem) : Boolean
     }
 
     interface View : BaseView<Prensenter>{
