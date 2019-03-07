@@ -15,8 +15,8 @@ class TopPresenter(val view: TopContract.View) : TopContract.Prensenter{
         view.fragmentTransaction(fragment)
     }
 
-    override fun bottomNavigationItemSelected(item: MenuItem) : Boolean {
-        LogUtils.d("TopPresenter#bottomNavigationItemSelected", "item: ${item.title}")
+    override fun navigationItemSelected(item: MenuItem) : Boolean {
+        LogUtils.d("TopPresenter#navigationItemSelected", "item: ${item.title}")
 
         val fragment = TopPageFragment()
         val bundle = Bundle()
