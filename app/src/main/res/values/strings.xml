@@ -3,7 +3,8 @@
 
     <!--Top page navigation-->
     <string name="top_navigation_top_page">トップ</string>
-    <string name="top_navigation_flash_card_list">マイ単語帳</string>
+    <string name="top_navigation_my_flash_card_list">マイ単語帳</string>
+    <string name="top_navigation_favor_flash_card_list">お気に入りの単語帳</string>
     <string name="top_navigation_my_account">アカウント</string>
 
     <!--Common-->
