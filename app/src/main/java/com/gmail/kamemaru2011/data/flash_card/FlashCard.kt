@@ -15,14 +15,14 @@ class FlashCard private constructor(author: Author, flashCardId : Int, private v
     )
 
     companion object {
-        //新規単語帳生成(ユーザーonly)
+        //新規単語帳生成(this user only)
         fun createNewFlashCard() : FlashCard{
             //TODO ユーザー情報呼び出し
             val author = Author(name = "USER_NAME")
             return FlashCard(author, 0x0, isUsers = true)
         }
 
-        //単語帳ロード
+        //単語帳ロード(this user or users)
         fun loadFlashCard(author: Author, flashCardId : Int, isUsers: Boolean) : FlashCard{
             return FlashCard(author, flashCardId, isUsers)
         }
