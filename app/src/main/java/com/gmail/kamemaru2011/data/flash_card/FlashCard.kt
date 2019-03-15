@@ -1,12 +1,11 @@
 package com.gmail.kamemaru2011.data.flash_card
 
-class FlashCard(private val author: Author, private val flashCardId : Int){
+class FlashCard private constructor(author: Author, flashCardId : Int, private val isUsers : Boolean){
     private val cards : List<Card> = ArrayList<Card>()
 
-    private val flashCardData = FlashCardData()
+    private val flashCardData = FlashCardData(author = author, flashCardID = flashCardId)
 
     init {
-
     }
 
     inner class FlashCardData(
@@ -14,4 +13,16 @@ class FlashCard(private val author: Author, private val flashCardId : Int){
             var cardNum: Int = -1, val tags: List<FCTag> = ArrayList<FCTag>(), var lastEditDate: String = "", var explanatoryText: String = "", //I 詳細データ
             var dlNum: Int = -1, var creationDate: String = "", var flashCardID: Int = -0x1 //U 内部データ
     )
+
+    companion object {
+        fun createNewFlashCard() : FlashCard{
+            //TODO ユーザー情報呼び出し
+            val author = Author(name = "USER_NAME")
+            return FlashCard(author, 0x0, isUsers = true)
+        }
+
+        fun loadFlashCard(author: Author, flashCardId : Int, isUsers: Boolean) : FlashCard{
+            return FlashCard(author, flashCardId, isUsers)
+        }
+    }
 }
