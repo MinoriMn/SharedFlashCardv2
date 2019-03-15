@@ -9,8 +9,6 @@ class Card(question_text: String, answer_text: String, question_image: ByteArray
         private set
 
 
-
-
     init {
         question = SideData(question_text, question_image)
         answer = SideData(answer_text, answer_image)
@@ -22,8 +20,9 @@ class Card(question_text: String, answer_text: String, question_image: ByteArray
     }
 
     //一面のデータ
-    inner class SideData(var text: String?, var image: ByteArray?)//デバッグ
-        : Serializable
+    inner class SideData(var text: String, var image: ByteArray?) : Serializable{
+        constructor(text: String) : this(text, null)
+    }
 
 }
 
