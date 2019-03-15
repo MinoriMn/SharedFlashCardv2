@@ -22,7 +22,7 @@ class FlashCard private constructor(author: Author, flashCardId : Int, private v
             return FlashCard(author, 0x0, isUsers = true)
         }
 
-        //単語帳ロード(this user or others)
+        //単語帳ロード
         fun loadFlashCard(author: Author, flashCardId : Int, isUsers: Boolean) : FlashCard{
             return FlashCard(author, flashCardId, isUsers)
         }
