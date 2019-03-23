@@ -1,9 +1,12 @@
 package com.gmail.kamemaru2011.data.flash_card
 
 class FlashCard private constructor(author: Author, flashCardId : Int, private val isUsers : Boolean, title: String){
-    private val cards : List<Card> = ArrayList<Card>()
+    var cards : List<Card> = ArrayList<Card>()
+        private set
 
-    private val flashCardData = FlashCardData(author = author, title = title, flashCardID = flashCardId)
+    var flashCardData = FlashCardData(author = author, title = title, flashCardID = flashCardId)
+        private set
+
 
     init {
     }

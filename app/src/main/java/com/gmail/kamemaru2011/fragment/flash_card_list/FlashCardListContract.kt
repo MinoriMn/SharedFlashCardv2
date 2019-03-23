@@ -13,6 +13,8 @@ interface FlashCardListContract{
         fun getFCardListSize(): Int
 
         fun onClickFlashCard(position: Int)
+
+        fun onBindFlashCardDataAtPosition(viewHolder: FlashCardListViewHolder, position: Int)
     }
 
     interface View: BaseView<Presenter> {
