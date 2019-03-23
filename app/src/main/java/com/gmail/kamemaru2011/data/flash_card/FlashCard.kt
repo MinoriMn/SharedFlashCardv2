@@ -1,9 +1,12 @@
 package com.gmail.kamemaru2011.data.flash_card
 
-class FlashCard private constructor(author: Author, flashCardId : Int, private val isUsers : Boolean){
-    private val cards : List<Card> = ArrayList<Card>()
+class FlashCard private constructor(author: Author, flashCardId : Int, private val isUsers : Boolean, title: String){
+    var cards : List<Card> = ArrayList<Card>()
+        private set
 
-    private val flashCardData = FlashCardData(author = author, flashCardID = flashCardId)
+    var flashCardData = FlashCardData(author = author, title = title, flashCardID = flashCardId)
+        private set
+
 
     init {
     }
@@ -19,12 +22,17 @@ class FlashCard private constructor(author: Author, flashCardId : Int, private v
         fun createNewFlashCard() : FlashCard{
             //TODO ユーザー情報呼び出し
             val author = Author(name = "USER_NAME")
-            return FlashCard(author, 0x0, isUsers = true)
+            return FlashCard(author, 0x0, isUsers = true, title = "new title")
         }
 
         //単語帳ロード
-        fun loadFlashCard(author: Author, flashCardId : Int, isUsers: Boolean) : FlashCard{
-            return FlashCard(author, flashCardId, isUsers)
+        fun loadFlashCard(author: Author, flashCardId : Int, isUsers: Boolean, title: String) : FlashCard{
+            return FlashCard(author, flashCardId, isUsers, title)
         }
+    }
+
+    override fun toString(): String {
+        //TODO FlashCard.toString()の上書き
+        return flashCardData.title
     }
 }
