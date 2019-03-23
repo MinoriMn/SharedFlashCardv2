@@ -16,15 +16,12 @@ import com.gmail.kamemaru2011.data.flash_card.FlashCard
 class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
     override val presenter: FlashCardListContract.Presenter = FlashCardListPresenter(this)
 
-    private var recyclerView : RecyclerView? = null
-    private var addFlashCardFAB : FloatingActionButton? = null
-
-    private var adapter : FlashCardListAdapter? = null
-    private var layoutManager : RecyclerView.LayoutManager? = null
-
-    private val flashCardList = ArrayList<FlashCard>()
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var addFlashCardFAB : FloatingActionButton
+    private lateinit var layoutManager : RecyclerView.LayoutManager
 
     private lateinit var activityMode : ActivityMode
+    private val adapter: FlashCardListAdapter = FlashCardListAdapter(presenter, this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -35,21 +32,19 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
 
         layoutManager = LinearLayoutManager(view.context)
 
-        recyclerView?.setHasFixedSize(true)
-        recyclerView?.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = layoutManager
 
         val bundel = arguments
 
         //TODO null時アプリ終了処理
         if (bundel != null) {
-            activityMode = bundel.get("BUNDLE_KEY_ACTIVITY_MODE") as ActivityMode
+            activityMode = bundel.get(BUNDLE_KEY_ACTIVITY_MODE) as ActivityMode
         }
 
-        //TODO DEBUG
-        for (i in 0..19) {
-            val author = Author(name = "USER_NAME")
-            flashCardList.add(FlashCard.loadFlashCard(author, 0x0, true, "DATA_$i"))
-        }
+        recyclerView.adapter = adapter
+
+        initLayout()
 
         return view
     }
@@ -57,13 +52,20 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
     fun initLayout(){
         when(activityMode){
             ActivityMode.Public -> {
-                addFlashCardFAB?.hide()
+                addFlashCardFAB.hide()
             }
 
             ActivityMode.Mine -> {
-                addFlashCardFAB?.show()
+                addFlashCardFAB.show()
+                addFlashCardFAB.setOnClickListener {
+                    presenter.onClickNewCardFAB()
+                }
             }
         }
+    }
+
+    override fun getChildAdapterPosition(view: View): Int {
+        return recyclerView.getChildAdapterPosition(view)
     }
 
     enum class ActivityMode{

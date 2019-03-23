@@ -27,4 +27,9 @@ class FlashCard private constructor(author: Author, flashCardId : Int, private v
             return FlashCard(author, flashCardId, isUsers, title)
         }
     }
+
+    override fun toString(): String {
+        //TODO FlashCard.toString()の上書き
+        return flashCardData.title
+    }
 }
