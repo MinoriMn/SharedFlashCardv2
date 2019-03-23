@@ -4,7 +4,8 @@
     <color name="colorPrimary">#FF6E00</color>
     <color name="colorPrimaryDark">#A54600</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorMilk">#f5e7e4</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorMilk">#FFF4F2</color>
+    <color name="flash_card_icon_tint">#5A5A5A</color>
 
 </resources>
