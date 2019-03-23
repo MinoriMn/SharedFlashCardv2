@@ -16,13 +16,15 @@ class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardLi
         //DEBUG
         for (i in 0..19) {
             val author = Author(name = "USER_NAME")
-            flashCardList.add(FlashCard.loadFlashCard(author, 0x0, true, "DATA_$i"))
+            flashCardList.add(FlashCard.loadMyFlashCard(author, 0x0, "DATA_$i", if (i % 2 == 0) FlashCard.ActiveType.MINE_PRIVATE else FlashCard.ActiveType.MINE_PUBLIC))
         }
     }
 
     override fun onBindFlashCardDataAtPosition(viewHolder: FlashCardListViewHolder, position: Int) {
         val flashCard = flashCardList[position]
-        viewHolder.setContent(title = flashCard.flashCardData.title)
+        val flashCardData = flashCard.flashCardData
+        viewHolder.initLayout(flashCardData.activeType)
+        viewHolder.setContent(title = flashCardData.title, username = flashCardData.author.name)
     }
 
     override fun onClickNewCardFAB() {

@@ -5,7 +5,7 @@ class UtilsBehavior{
         /**
          * ログ表示
          */
-        var isLOG = false
+        var isLOG = true
 
     }
 }
