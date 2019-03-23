@@ -16,7 +16,7 @@ class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardLi
         //DEBUG
         for (i in 0..19) {
             val author = Author(name = "USER_NAME")
-            flashCardList.add(FlashCard.loadMyFlashCard(author, 0x0, "DATA_$i", if (i % 2 == 0) FlashCard.ActiveType.MINE_PRIVATE else FlashCard.ActiveType.MINE_PUBLIC))
+            flashCardList.add(FlashCard.loadMyFlashCard(author, 0x0, "DATA_${i}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", if (i % 2 == 0) FlashCard.ActiveType.MINE_PRIVATE else FlashCard.ActiveType.MINE_PUBLIC))
         }
     }
 
