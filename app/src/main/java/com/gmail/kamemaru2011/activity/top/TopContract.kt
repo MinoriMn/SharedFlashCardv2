@@ -6,11 +6,11 @@ import com.gmail.kamemaru2011.mvp_base.BasePresenter
 import com.gmail.kamemaru2011.mvp_base.BaseView
 
 interface TopContract{
-    interface Prensenter : BasePresenter{
+    interface Presenter : BasePresenter{
         fun navigationItemSelected(item : MenuItem) : Boolean
     }
 
-    interface View : BaseView<Prensenter>{
+    interface View : BaseView<Presenter>{
 
         fun fragmentTransaction(fragment : Fragment)
     }
