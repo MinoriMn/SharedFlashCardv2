@@ -11,6 +11,8 @@ import com.gmail.kamemaru2011.utils.LogUtils
 class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardListContract.Presenter{
     private val flashCardList = ArrayList<FlashCard>()
 
+    private var isFCEditorLaunchable = true
+
     override fun start() {
         //TODO カードのロード処理
         //DEBUG
@@ -18,6 +20,10 @@ class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardLi
             val author = Author(name = "USER_NAME")
             flashCardList.add(FlashCard.loadMyFlashCard(author, 0x0, "DATA_${i}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", if (i % 2 == 0) FlashCard.ActiveType.MINE_PRIVATE else FlashCard.ActiveType.MINE_PUBLIC))
         }
+    }
+
+    override fun onResume() {
+        isFCEditorLaunchable = true
     }
 
     override fun onBindFlashCardDataAtPosition(viewHolder: FlashCardListViewHolder, position: Int) {
@@ -37,7 +43,11 @@ class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardLi
 
     override fun startFCardEditorActivity(flashCard: FlashCard) {
         //TODO FlashCardEditorの立ち上げ
-        LogUtils.d("#StartFCardEditorActivity", flashCard.toString())
+        if(isFCEditorLaunchable) {
+            LogUtils.d("#StartFCardEditorActivity", flashCard.toString())
+            isFCEditorLaunchable = false
+        }
+
     }
 
     override fun getFCardListSize(): Int = flashCardList.size

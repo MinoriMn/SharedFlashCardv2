@@ -65,6 +65,11 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
         return recyclerView.getChildAdapterPosition(view)
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
+    }
+
     enum class ActivityMode{
         Public,
         Mine

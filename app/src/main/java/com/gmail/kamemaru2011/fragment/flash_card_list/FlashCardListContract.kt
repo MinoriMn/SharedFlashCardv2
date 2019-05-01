@@ -15,6 +15,8 @@ interface FlashCardListContract{
         fun onClickFlashCard(position: Int)
 
         fun onBindFlashCardDataAtPosition(viewHolder: FlashCardListViewHolder, position: Int)
+
+        fun onResume()
     }
 
     interface View: BaseView<Presenter> {
