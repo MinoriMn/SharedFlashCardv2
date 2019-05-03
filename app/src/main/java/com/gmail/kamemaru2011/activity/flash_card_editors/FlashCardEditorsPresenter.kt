@@ -1,6 +1,6 @@
 package com.gmail.kamemaru2011.activity.flash_card_editors
 
-class FlashCardEditorsPresenter: FlashCardEditorsContract.Presenter{
+class FlashCardEditorsPresenter(private val view: FlashCardEditorsContract.View): FlashCardEditorsContract.Presenter{
     override fun start() {
         //TODO fragmentの読み込み
     }

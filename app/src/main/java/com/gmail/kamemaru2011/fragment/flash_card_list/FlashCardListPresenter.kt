@@ -8,7 +8,7 @@ import com.gmail.kamemaru2011.data.flash_card.Author
 import com.gmail.kamemaru2011.data.flash_card.FlashCard
 import com.gmail.kamemaru2011.utils.LogUtils
 
-class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardListContract.Presenter{
+class FlashCardListPresenter(private val view: FlashCardListContract.View) : FlashCardListContract.Presenter{
     private val flashCardList = ArrayList<FlashCard>()
 
     private var isFCEditorLaunchable = true
