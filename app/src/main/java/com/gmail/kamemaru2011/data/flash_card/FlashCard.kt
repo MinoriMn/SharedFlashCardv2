@@ -1,6 +1,8 @@
 package com.gmail.kamemaru2011.data.flash_card
 
-class FlashCard private constructor(author: Author, flashCardId : Int, title: String, activeType: ActiveType){
+import java.io.Serializable
+
+class FlashCard private constructor(author: Author, flashCardId : Int, title: String, activeType: ActiveType): Serializable{
     var cards : List<Card> = ArrayList<Card>()
         private set
 
