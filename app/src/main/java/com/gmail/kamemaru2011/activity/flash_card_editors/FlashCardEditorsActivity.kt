@@ -4,28 +4,33 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.gmail.kamemaru2011.R
+import com.gmail.kamemaru2011.data.flash_card.FlashCard
 import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorFragment
 
 class FlashCardEditorsActivity : AppCompatActivity(), FlashCardEditorsContract.View {
-    override val presenter = FlashCardEditorsPresenter(this).also { it.start() }
+    override val presenter = FlashCardEditorsPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flash_card_editors)
 
-        setFlashCardEditorFragment()
+        if (savedInstanceState != null) {
+            presenter.getFlashCardFromBundle(savedInstanceState).start()
+        }
     }
 
-    private fun setFlashCardEditorFragment(){
+    override fun setFlashCardEditorFragment(bundle: Bundle){
         val fragment = FlashCardEditorFragment()
+        fragment.arguments = bundle
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.container, fragment)
         transaction.commit()
     }
 
-    fun setCardEditorFragment(){
+    override fun setCardEditorFragment(bundle: Bundle){
         //TODO setCardEditorFragment
         val fragment = FlashCardEditorFragment()
+        fragment.arguments = bundle
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)

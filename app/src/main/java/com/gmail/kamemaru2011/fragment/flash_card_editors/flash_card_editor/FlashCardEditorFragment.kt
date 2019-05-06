@@ -7,18 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gmail.kamemaru2011.R
+import com.gmail.kamemaru2011.data.flash_card.FlashCard
 
 
 class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View.OnClickListener {
     override val presenter = FlashCardEditorPresenter(this).also { it.start() }
     private lateinit var recyclerView: RecyclerView
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
         val view = inflater.inflate(R.layout.fragment_flash_card_editor, container, false)
 
+        val adapter = FlashCardEditorPresenter.FlashCardEditorAdapter(presenter, this)
         recyclerView = view.findViewById(R.id.recyclerview)
+        recyclerView.adapter = adapter
 
         initLayout(view)
 

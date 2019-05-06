@@ -1,9 +1,12 @@
 package com.gmail.kamemaru2011.fragment.flash_card_list
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.gmail.kamemaru2011.R
+import com.gmail.kamemaru2011.activity.flash_card_editors.FlashCardEditorsActivity
 import com.gmail.kamemaru2011.data.flash_card.Author
 import com.gmail.kamemaru2011.data.flash_card.FlashCard
 import com.gmail.kamemaru2011.utils.LogUtils
@@ -33,18 +36,21 @@ class FlashCardListPresenter(private val view: FlashCardListContract.View) : Fla
         viewHolder.setContent(title = flashCardData.title, username = flashCardData.author.name)
     }
 
-    override fun onClickNewCardFAB() {
-        startFCardEditorActivity(FlashCard.createNewFlashCard())
+    override fun onClickNewCardFAB(context: Context?) {
+        startFCardEditorActivity(context, FlashCard.createNewFlashCard())
     }
 
-    override fun onClickFlashCard(position: Int) {
-        startFCardEditorActivity(flashCardList[position])
+    override fun onClickFlashCard(context: Context?, position: Int) {
+        startFCardEditorActivity(context, flashCardList[position])
     }
 
-    override fun startFCardEditorActivity(flashCard: FlashCard) {
+    override fun startFCardEditorActivity(context: Context?, flashCard: FlashCard) {
         //TODO FlashCardEditorの立ち上げ
         if(isFCEditorLaunchable) {
-            LogUtils.d("#StartFCardEditorActivity", flashCard.toString())
+            val intent = Intent(context, FlashCardEditorsActivity::class.java)
+            intent.putExtra(INTENT_EXTRA_FLASH_CARD, flashCardList)
+            context?.startActivity(intent)
+
             isFCEditorLaunchable = false
         }
 
@@ -65,5 +71,9 @@ class FlashCardListPresenter(private val view: FlashCardListContract.View) : Fla
         override fun onBindViewHolder(holder: FlashCardListViewHolder, position: Int) {
             presenter.onBindFlashCardDataAtPosition(holder, position)
         }
+    }
+
+    companion object {
+        val INTENT_EXTRA_FLASH_CARD = "INTENT_EXTRA_FLASH_CARD"
     }
 }
