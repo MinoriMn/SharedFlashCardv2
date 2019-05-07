@@ -1,8 +1,8 @@
 package com.gmail.kamemaru2011.activity.flash_card_editors
 
+import android.content.Intent
 import android.os.Bundle
 import com.gmail.kamemaru2011.data.flash_card.FlashCard
-import com.gmail.kamemaru2011.fragment.flash_card_list.FlashCardListPresenter
 
 class FlashCardEditorsPresenter(private val view: FlashCardEditorsContract.View): FlashCardEditorsContract.Presenter{
     private lateinit var flashCard: FlashCard
@@ -13,8 +13,8 @@ class FlashCardEditorsPresenter(private val view: FlashCardEditorsContract.View)
         view.setFlashCardEditorFragment(bundle)
     }
 
-    override fun getFlashCardFromBundle(bundle: Bundle): FlashCardEditorsContract.Presenter {
-        flashCard = bundle.getSerializable(INTENT_EXTRA_FLASH_CARD) as FlashCard
+    override fun getFlashCardFromIntent(intent: Intent): FlashCardEditorsContract.Presenter {
+        flashCard = intent.getSerializableExtra(INTENT_EXTRA_FLASH_CARD) as FlashCard
         return this
     }
 

@@ -8,10 +8,9 @@ interface FlashCardEditorContract{
     interface Presenter: BasePresenter{
         fun getCardListSize(): Int
 
-        fun getFlashCardFromBundle(bundle: Bundle): Presenter
+        fun getFlashCardFromBundle(bundle: Bundle?): Presenter
 
         fun onBindFlashCardDataAtPosition(viewHolder: CardListHolder, position: Int)
-
     }
 
     interface View: BaseView<Presenter>{

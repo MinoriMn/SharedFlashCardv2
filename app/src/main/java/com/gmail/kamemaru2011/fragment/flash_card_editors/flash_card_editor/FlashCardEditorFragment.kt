@@ -2,6 +2,7 @@ package com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.kamemaru2011.R
-import com.gmail.kamemaru2011.data.flash_card.FlashCard
 
 
 class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View.OnClickListener {
@@ -26,15 +26,6 @@ class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View
     private lateinit var numWatchTextView: TextView
 
     private lateinit var publishedIcon: ImageView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (savedInstanceState != null) {
-            presenter.getFlashCardFromBundle(savedInstanceState)
-        }
-        presenter.start()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -54,9 +45,17 @@ class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View
 
         val adapter = FlashCardEditorPresenter.CardListAdapter(presenter, this)
         recyclerView = view.findViewById(R.id.recyclerview)
+
+        val layoutManager = LinearLayoutManager(view.context)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
 
         initLayout(view)
+
+        //presenter起動
+        presenter.getFlashCardFromBundle(arguments)
+        presenter.start()
 
         return view
     }

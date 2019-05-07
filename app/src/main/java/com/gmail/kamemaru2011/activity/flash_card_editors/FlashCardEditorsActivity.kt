@@ -1,11 +1,11 @@
 package com.gmail.kamemaru2011.activity.flash_card_editors
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import com.gmail.kamemaru2011.R
-import com.gmail.kamemaru2011.data.flash_card.FlashCard
 import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorFragment
+
 
 class FlashCardEditorsActivity : AppCompatActivity(), FlashCardEditorsContract.View {
     override val presenter = FlashCardEditorsPresenter(this)
@@ -14,9 +14,7 @@ class FlashCardEditorsActivity : AppCompatActivity(), FlashCardEditorsContract.V
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flash_card_editors)
 
-        if (savedInstanceState != null) {
-            presenter.getFlashCardFromBundle(savedInstanceState).start()
-        }
+        presenter.getFlashCardFromIntent(intent).start()
     }
 
     override fun setFlashCardEditorFragment(bundle: Bundle){

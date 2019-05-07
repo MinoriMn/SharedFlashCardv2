@@ -28,7 +28,6 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
         addFlashCardFAB = view.findViewById<FloatingActionButton>(R.id.add_flash_card)
 
         layoutManager = LinearLayoutManager(view.context)
-
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager
 

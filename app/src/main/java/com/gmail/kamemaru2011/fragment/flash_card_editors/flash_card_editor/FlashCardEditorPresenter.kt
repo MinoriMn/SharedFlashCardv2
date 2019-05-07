@@ -25,8 +25,8 @@ class FlashCardEditorPresenter(val view: FlashCardEditorContract.View): FlashCar
         }
     }
 
-    override fun getFlashCardFromBundle(bundle: Bundle): FlashCardEditorContract.Presenter {
-        flashCard = bundle.getSerializable(FlashCardEditorsPresenter.INTENT_EXTRA_FLASH_CARD) as FlashCard
+    override fun getFlashCardFromBundle(bundle: Bundle?): FlashCardEditorContract.Presenter {
+        flashCard = bundle?.getSerializable(FlashCardEditorsPresenter.INTENT_EXTRA_FLASH_CARD) as FlashCard
         return this
     }
 
