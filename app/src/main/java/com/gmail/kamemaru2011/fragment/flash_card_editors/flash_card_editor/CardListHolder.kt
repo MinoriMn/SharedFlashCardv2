@@ -9,30 +9,24 @@ import com.gmail.kamemaru2011.data.flash_card.Card
 import kotlinx.android.synthetic.main.card.view.*
 
 class CardListHolder(v : View, private val presenter: FlashCardEditorContract.Presenter, private val fragment: FlashCardEditorFragment) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
-    private val qContent: View
-    private val aContent: View
+    private val qContent: View = v.findViewById(R.id.qContent)
+    private val aContent: View = v.findViewById(R.id.aContent)
     private var isQuestion: Boolean = true
 
-    private val qTextView: TextView
-    private val aTextview: TextView
+    private val qTextView: TextView = v.findViewById(R.id.qContentTextView)
+    private val aTextView: TextView = v.findViewById(R.id.aContentTextView)
 
-    private val qImageView: ImageView
-    private val aImageView: ImageView
+    private val qImageView: ImageView = v.findViewById(R.id.qContentImageView)
+    private val aImageView: ImageView = v.findViewById(R.id.aContentImageView)
 
     init {
-        qContent = v.findViewById(R.id.qContent)
-        aContent = v.findViewById(R.id.aContent)
-
-        qTextView = v.findViewById(R.id.qContentTextView)
-        aTextview = v.findViewById(R.id.aContentTextView)
-
-        qImageView = v.findViewById(R.id.qContentImageView)
-        aImageView = v.findViewById(R.id.aContentImageView)
+        v.setOnClickListener(this)
+        v.setOnLongClickListener(this)
     }
 
     fun initLayout(card: Card){
         qTextView.text = card.question.text
-        aTextview.text = card.answer.text
+        aTextView.text = card.answer.text
         if(card.question.image != null) {
             qImageView.setImageBitmap(card.question.image)
         }else{
@@ -68,11 +62,17 @@ class CardListHolder(v : View, private val presenter: FlashCardEditorContract.Pr
     }
 
     override fun onClick(v: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (v != null) {
+            presenter.onClickCard(fragment.activity, fragment.getChildAdapterPosition(v))
+        }
     }
 
     override fun onLongClick(v: View?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO LongClickListenerの分岐
+        if (v != null) {
+            presenter.onClickCard(fragment.activity, fragment.getChildAdapterPosition(v))
+        }
+        return true
     }
 
 }
