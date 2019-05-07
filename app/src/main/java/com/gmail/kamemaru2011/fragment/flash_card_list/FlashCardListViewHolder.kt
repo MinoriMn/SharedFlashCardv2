@@ -1,5 +1,6 @@
 package com.gmail.kamemaru2011.fragment.flash_card_list
 
+import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -59,14 +60,14 @@ class FlashCardListViewHolder(v : View, private val presenter: FlashCardListCont
 
     override fun onClick(v: View?) {
         if (v != null) {
-            presenter.onClickFlashCard(position = fragment.getChildAdapterPosition(v))
+            presenter.onClickFlashCard(fragment.activity, fragment.getChildAdapterPosition(v))
         }
     }
 
     override fun onLongClick(v: View?): Boolean {
         //TODO LongClickListenerの分岐
         if (v != null) {
-            presenter.onClickFlashCard(position = fragment.getChildAdapterPosition(v))
+            presenter.onClickFlashCard(fragment.activity, fragment.getChildAdapterPosition(v))
         }
         return true
     }

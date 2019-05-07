@@ -1,5 +1,6 @@
 package com.gmail.kamemaru2011.fragment.flash_card_list
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 import com.gmail.kamemaru2011.data.flash_card.FlashCard
@@ -8,9 +9,9 @@ import com.gmail.kamemaru2011.mvp_base.BaseView
 
 interface FlashCardListContract{
     interface Presenter: BasePresenter {
-        fun onClickNewCardFAB(context: Context?)
-        fun onClickFlashCard(context: Context?, position: Int)
-        fun startFCardEditorActivity(context: Context?, flashCard: FlashCard)
+        fun onClickNewCardFAB(activity: Activity?)
+        fun onClickFlashCard(activity: Activity?, position: Int)
+        fun startFCardEditorActivity(activity: Activity?, flashCard: FlashCard)
 
         fun getFCardListSize(): Int
 

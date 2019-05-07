@@ -55,7 +55,7 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
             ActivityMode.Mine -> {
                 addFlashCardFAB.show()
                 addFlashCardFAB.setOnClickListener {
-                    presenter.onClickNewCardFAB(context)
+                    presenter.onClickNewCardFAB(activity)
                 }
             }
         }

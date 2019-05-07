@@ -9,12 +9,12 @@ class FlashCardEditorsPresenter(private val view: FlashCardEditorsContract.View)
 
     override fun start() {
         val bundle = Bundle()
-        bundle.putSerializable(FlashCardListPresenter.INTENT_EXTRA_FLASH_CARD, flashCard)
+        bundle.putSerializable(INTENT_EXTRA_FLASH_CARD, flashCard)
         view.setFlashCardEditorFragment(bundle)
     }
 
     override fun getFlashCardFromBundle(bundle: Bundle): FlashCardEditorsContract.Presenter {
-        flashCard = bundle.getSerializable(FlashCardListPresenter.INTENT_EXTRA_FLASH_CARD) as FlashCard
+        flashCard = bundle.getSerializable(INTENT_EXTRA_FLASH_CARD) as FlashCard
         return this
     }
 
@@ -23,4 +23,7 @@ class FlashCardEditorsPresenter(private val view: FlashCardEditorsContract.View)
 
     }
 
+    companion object {
+        val INTENT_EXTRA_FLASH_CARD = "INTENT_EXTRA_FLASH_CARD"
+    }
 }
