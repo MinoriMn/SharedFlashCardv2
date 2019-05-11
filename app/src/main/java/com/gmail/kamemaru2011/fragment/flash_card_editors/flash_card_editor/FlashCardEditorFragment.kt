@@ -11,9 +11,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.kamemaru2011.R
+import com.gmail.kamemaru2011.data.flash_card.Card
+import com.gmail.kamemaru2011.fragment.card_list.CardListFragment
+import com.gmail.kamemaru2011.fragment.card_list.CardListPresenter
+import com.gmail.kamemaru2011.fragment.card_list.OnClickCardListItemListener
 
 
-class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View.OnClickListener {
+class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View.OnClickListener, OnClickCardListItemListener {
     override val presenter = FlashCardEditorPresenter(this)
     private lateinit var recyclerView: RecyclerView
 
@@ -48,14 +52,11 @@ class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View
 
         addFlashCardFAB = view.findViewById<FloatingActionButton>(R.id.add_card)
 
-        //TODO cardList読み込み
-
-
-        initLayout(view)
-
         //presenter起動
         presenter.getFlashCardFromBundle(arguments)
         presenter.start()
+
+        initLayout(view)
 
         return view
     }
@@ -66,8 +67,12 @@ class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View
         view.findViewById<View>(R.id.textData).setOnClickListener(this)
 
         addFlashCardFAB.setOnClickListener {
-            presenter.onClickNewCardFAB(activity)
+            presenter.onClickNewCardFAB()
         }
+    }
+
+    override fun onClick(card: Card, position: Int) {
+        presenter.onClickCard(card)
     }
 
     override fun setFlashCardContent(title: String?, username: String?){
@@ -77,6 +82,15 @@ class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View
 
     override fun getChildAdapterPosition(view: View): Int {
         return recyclerView.getChildAdapterPosition(view)
+    }
+
+    override fun setCardListFragment(fragment: Fragment) {
+        val supportManager = activity!!.supportFragmentManager
+        if(supportManager != null) {
+            val transaction = supportManager.beginTransaction()
+            transaction.add(R.id.card_list, fragment)
+            transaction.commit()
+        }
     }
 
     override fun onClick(v: View?) {

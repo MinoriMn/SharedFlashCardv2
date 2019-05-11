@@ -47,6 +47,9 @@ class FlashCardListPresenter(private val view: FlashCardListContract.View) : Fla
 
     override fun startFCardEditorActivity(activity: Activity?, flashCard: FlashCard) {
         if(isFCEditorLaunchable) {
+            if(!flashCard.isCardListLoaded()) {
+                flashCard.loadCardListData()
+            }
             val intent = Intent(activity, FlashCardEditorsActivity::class.java)
             intent.putExtra(INTENT_EXTRA_FLASH_CARD, flashCard)
             activity?.startActivity(intent)

@@ -9,7 +9,7 @@ import com.gmail.kamemaru2011.data.flash_card.Card
 import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorContract
 import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorFragment
 
-class CardListViewHolder(v : View, private val presenter: CardListContract.Presenter, private val fragment: FlashCardEditorFragment) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
+class CardListViewHolder(v : View, private val presenter: CardListContract.Presenter, private val fragment: CardListFragment) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
     private val qContent: View = v.findViewById(R.id.qContent)
     private val aContent: View = v.findViewById(R.id.aContent)
     private var isQuestion: Boolean = true
@@ -64,14 +64,14 @@ class CardListViewHolder(v : View, private val presenter: CardListContract.Prese
 
     override fun onClick(v: View?) {
         if (v != null) {
-            presenter.onClickCard(fragment.activity, fragment.getChildAdapterPosition(v))
+            presenter.onClickCard(fragment.getChildAdapterPosition(v))
         }
     }
 
     override fun onLongClick(v: View?): Boolean {
         //TODO LongClickListenerの分岐
         if (v != null) {
-            presenter.onClickCard(fragment.activity, fragment.getChildAdapterPosition(v))
+            presenter.onClickCard(fragment.getChildAdapterPosition(v))
         }
         return true
     }

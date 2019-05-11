@@ -1,51 +1,37 @@
 package com.gmail.kamemaru2011.fragment.card_list
 
-import android.app.Activity
+import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.gmail.kamemaru2011.R
 import com.gmail.kamemaru2011.data.flash_card.Card
 import com.gmail.kamemaru2011.data.flash_card.FlashCard
-import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorContract
 import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorFragment
-import com.gmail.kamemaru2011.utils.LogUtils
 
 class CardListPresenter(private val view: CardListContract.View) : CardListContract.Presenter{
     private lateinit var cardList : ArrayList<Card>
 
-
     override fun start() {
-        cardList = ArrayList(flashCard!!.cards)
 
     }
 
+    override fun onClickCard(position: Int) {
+        view.onClickedCardCallback(cardList[position], position)
+    }
+
+    override fun getCardListFromBundle(bundle: Bundle?): CardListContract.Presenter {
+        val data = bundle?.getSerializable(BUNDLE_KEY_FLASH_CARD) as FlashCard
+        cardList = data.cards ?: ArrayList()
+
+        return this
+    }
 
     override fun getCardListSize(): Int  = cardList.size
 
     override fun onBindFlashCardDataAtPosition(viewViewHolder: CardListViewHolder, position: Int) {
         viewViewHolder.initLayout(cardList[position])
-    }
-
-    /**
-     * 既存カード編集開始
-     */
-    override fun onClickCard(activity: Activity?, position: Int) {
-        //TODO カード編集画面立ち上げ
-        LogUtils.d("CardEditor", "card clicked $position ${cardList.get(position).question.text}")
-    }
-
-    /**
-     * 新規カード編集開始
-     */
-    override fun onClickNewCardFAB(activity: Activity?) {
-        //TODO カード編集画面立ち上げ
-        LogUtils.d("CardEditor", "card clicked new card")
-
-    }
-
-    override fun startCardEditorActivity(activity: Activity?, flashCard: FlashCard) {
-        //TODO カード編集画面立ち上げ
     }
 
 
@@ -62,5 +48,9 @@ class CardListPresenter(private val view: CardListContract.View) : CardListContr
             presenter.onBindFlashCardDataAtPosition(viewViewHolder, position)
         }
 
+    }
+
+    companion object {
+        val BUNDLE_KEY_FLASH_CARD = "BUNDLE_KEY_FLASH_CARD"
     }
 }

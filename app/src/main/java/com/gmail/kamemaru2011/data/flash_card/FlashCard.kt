@@ -27,6 +27,11 @@ class FlashCard private constructor(author: Author, flashCardId : Int, title: St
 
     fun loadCardListData(){
         //TODO カードリスト読み込み
+        //DEBUG
+        cards = ArrayList()
+        for (i in 0..20){
+            cards!!.add(Card("q_tex_$i", "a_tex_$i", null, null))
+        }
     }
 
     fun newCardListData(){
