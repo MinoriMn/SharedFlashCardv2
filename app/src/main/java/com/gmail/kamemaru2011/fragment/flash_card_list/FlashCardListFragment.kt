@@ -25,10 +25,9 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
         val view = inflater.inflate(R.layout.fragment_flash_card_list, container, false)
 
         recyclerView = view.findViewById(R.id.flash_card_list)
-        addFlashCardFAB = view.findViewById(R.id.add_flash_card)
+        addFlashCardFAB = view.findViewById<FloatingActionButton>(R.id.add_flash_card)
 
         layoutManager = LinearLayoutManager(view.context)
-
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager
 
@@ -55,7 +54,7 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
             ActivityMode.Mine -> {
                 addFlashCardFAB.show()
                 addFlashCardFAB.setOnClickListener {
-                    presenter.onClickNewCardFAB()
+                    presenter.onClickNewCardFAB(activity)
                 }
             }
         }
@@ -63,6 +62,11 @@ class FlashCardListFragment() : Fragment(), FlashCardListContract.View {
 
     override fun getChildAdapterPosition(view: View): Int {
         return recyclerView.getChildAdapterPosition(view)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
     }
 
     enum class ActivityMode{

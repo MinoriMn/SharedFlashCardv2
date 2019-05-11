@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/flash_card_margin"
+    android:layout_marginTop="@dimen/flash_card_margin"
+    android:layout_marginEnd="@dimen/flash_card_margin"
+    android:background="@color/colorWhite"
+    android:elevation="@dimen/flash_card_elevation">
+
+    <FrameLayout
+        android:id="@+id/viewSize"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,4:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/qContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/shape_circle" />
+
+                <TextView
+                    android:id="@+id/qContentTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Q_TEXT" />
+
+                <ImageView
+                    android:id="@+id/qContentImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/shape_circle" />
+
+                <TextView
+                    android:id="@+id/aContentTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="A_TEXT" />
+
+                <ImageView
+                    android:id="@+id/aContentImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,15 +1,21 @@
 package com.gmail.kamemaru2011.fragment.flash_card_list
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.gmail.kamemaru2011.R
+import com.gmail.kamemaru2011.activity.flash_card_editors.FlashCardEditorsActivity
+import com.gmail.kamemaru2011.activity.flash_card_editors.FlashCardEditorsPresenter.Companion.INTENT_EXTRA_FLASH_CARD
 import com.gmail.kamemaru2011.data.flash_card.Author
 import com.gmail.kamemaru2011.data.flash_card.FlashCard
-import com.gmail.kamemaru2011.utils.LogUtils
 
-class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardListContract.Presenter{
+class FlashCardListPresenter(private val view: FlashCardListContract.View) : FlashCardListContract.Presenter{
     private val flashCardList = ArrayList<FlashCard>()
+
+    private var isFCEditorLaunchable = true
 
     override fun start() {
         //TODO カードのロード処理
@@ -20,6 +26,10 @@ class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardLi
         }
     }
 
+    override fun onResume() {
+        isFCEditorLaunchable = true
+    }
+
     override fun onBindFlashCardDataAtPosition(viewHolder: FlashCardListViewHolder, position: Int) {
         val flashCard = flashCardList[position]
         val flashCardData = flashCard.flashCardData
@@ -27,17 +37,25 @@ class FlashCardListPresenter(val view: FlashCardListContract.View) : FlashCardLi
         viewHolder.setContent(title = flashCardData.title, username = flashCardData.author.name)
     }
 
-    override fun onClickNewCardFAB() {
-        startFCardEditorActivity(FlashCard.createNewFlashCard())
+    override fun onClickNewCardFAB(activity: Activity?) {
+        startFCardEditorActivity(activity, FlashCard.createNewFlashCard())
     }
 
-    override fun onClickFlashCard(position: Int) {
-        startFCardEditorActivity(flashCardList[position])
+    override fun onClickFlashCard(activity: Activity?, position: Int) {
+        startFCardEditorActivity(activity, flashCardList[position])
     }
 
-    override fun startFCardEditorActivity(flashCard: FlashCard) {
-        //TODO FlashCardEditorの立ち上げ
-        LogUtils.d("#StartFCardEditorActivity", flashCard.toString())
+    override fun startFCardEditorActivity(activity: Activity?, flashCard: FlashCard) {
+        if(isFCEditorLaunchable) {
+            if(!flashCard.isCardListLoaded()) {
+                flashCard.loadCardListData()
+            }
+            val intent = Intent(activity, FlashCardEditorsActivity::class.java)
+            intent.putExtra(INTENT_EXTRA_FLASH_CARD, flashCard)
+            activity?.startActivity(intent)
+
+            isFCEditorLaunchable = false
+        }
     }
 
     override fun getFCardListSize(): Int = flashCardList.size
