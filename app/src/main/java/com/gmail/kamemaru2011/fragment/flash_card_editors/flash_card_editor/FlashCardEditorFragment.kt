@@ -48,13 +48,8 @@ class FlashCardEditorFragment() : Fragment(), FlashCardEditorContract.View, View
 
         addFlashCardFAB = view.findViewById<FloatingActionButton>(R.id.add_card)
 
-        val adapter = CardListAdapter(presenter, this)
-        recyclerView = view.findViewById(R.id.recyclerview)
+        //TODO cardList読み込み
 
-        val layoutManager = LinearLayoutManager(view.context)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
 
         initLayout(view)
 

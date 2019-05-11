@@ -1,4 +1,4 @@
-package com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor
+package com.gmail.kamemaru2011.fragment.card_list
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -6,9 +6,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.kamemaru2011.R
 import com.gmail.kamemaru2011.data.flash_card.Card
-import kotlinx.android.synthetic.main.card.view.*
+import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorContract
+import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorFragment
 
-class CardListHolder(v : View, private val presenter: FlashCardEditorContract.Presenter, private val fragment: FlashCardEditorFragment) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
+class CardListViewHolder(v : View, private val presenter: CardListContract.Presenter, private val fragment: FlashCardEditorFragment) : RecyclerView.ViewHolder(v), View.OnClickListener, View.OnLongClickListener {
     private val qContent: View = v.findViewById(R.id.qContent)
     private val aContent: View = v.findViewById(R.id.aContent)
     private var isQuestion: Boolean = true

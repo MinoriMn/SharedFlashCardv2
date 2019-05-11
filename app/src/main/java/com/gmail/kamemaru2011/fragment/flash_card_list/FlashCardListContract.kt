@@ -2,8 +2,10 @@ package com.gmail.kamemaru2011.fragment.flash_card_list
 
 import android.app.Activity
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import com.gmail.kamemaru2011.data.flash_card.FlashCard
+import com.gmail.kamemaru2011.fragment.flash_card_editors.flash_card_editor.FlashCardEditorContract
 import com.gmail.kamemaru2011.mvp_base.BasePresenter
 import com.gmail.kamemaru2011.mvp_base.BaseView
 
