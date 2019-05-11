@@ -1,14 +1,23 @@
 package com.gmail.kamemaru2011.data.flash_card
 
 class FlashCard private constructor(author: Author, flashCardId : Int, title: String, activeType: ActiveType){
-    var cards : List<Card> = ArrayList<Card>()
-        private set
+    var cards : ArrayList<Card>? = null
 
     var flashCardData = FlashCardData(author = author, title = title, flashCardID = flashCardId, activeType = activeType)
         private set
 
 
     init {
+    }
+
+    fun isCardListLoaded(): Boolean = cards != null
+
+    fun loadCardListData(){
+        //TODO カードリスト読み込み
+    }
+
+    fun newCardListData(){
+        cards = ArrayList<Card>()
     }
 
     inner class FlashCardData(
