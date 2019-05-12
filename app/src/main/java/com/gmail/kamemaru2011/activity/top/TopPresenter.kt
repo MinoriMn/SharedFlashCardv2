@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.MenuItem
 import com.gmail.kamemaru2011.R
-import com.gmail.kamemaru2011.data.flash_card.FlashCard
 import com.gmail.kamemaru2011.fragment.flash_card_list.FlashCardListFragment
 import com.gmail.kamemaru2011.fragment.flash_card_list.FlashCardListFragment.Companion.BUNDLE_KEY_ACTIVITY_MODE
 import com.gmail.kamemaru2011.fragment.top.TopPageFragment
 import com.gmail.kamemaru2011.fragment.top.TopPageFragment.Companion.DEBUG_BUNDLE_KEY
 import com.gmail.kamemaru2011.utils.LogUtils
 
-class TopPresenter(val view: TopContract.View) : TopContract.Prensenter{
+class TopPresenter(val view: TopContract.View) : TopContract.Presenter{
     override fun start() {
         val fragment = TopPageFragment()
         val bundle = Bundle()

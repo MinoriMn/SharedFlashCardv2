@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.app_bar_top.*
 
 class TopActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, TopContract.View {
 
-    override val presenter: TopContract.Prensenter = TopPresenter(this)
+    override val presenter: TopContract.Presenter = TopPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
